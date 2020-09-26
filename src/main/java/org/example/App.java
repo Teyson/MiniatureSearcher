@@ -38,23 +38,24 @@ public class App {
                 String pageNumbering = "page " + Integer.toString(pageNum++) + " out of " + Integer.toString(totalPageNum) + ":";
                 System.out.println(pageNumbering);
 
-                //Loops through all the items
+                //Loops through all the items and figures out if it fits the search term
                 for (Element item : items) {
                     //Gets the name of the item
                     String text = item.text();
 
-                    //Make the strings more comparable
+                    //region Make the strings more comparable
                     String lowerCaseText = text.toLowerCase();
                     String lowerCaseSearch = searchWord.toLowerCase();
+                    //endregion
 
-                    //Compares wether the search term is part of the item name
+                    //Compares whether the search term is part of the item name
                     if (lowerCaseText.contains(lowerCaseSearch)) {
                         //Prints the item name and the url for the item to the user
                         System.out.println("    " + lowerCaseText + ": " + item.child(0).attributes().get("href"));
                     }
                 }
 
-                //Finds the next page arrow
+                //region Finds the next page arrow
                 Elements navArrow = doc.getElementsByClass("sw-pagination__nav-circle\n" +
                         "                  sw-grid-flex\n" +
                         "                  sw-grid-flex--align-center\n" +
@@ -63,6 +64,7 @@ public class App {
                         "                  sw--border-grey-1\n" +
                         "                  sw--margin-left-2\n" +
                         "                  sw--text-decoration-none");
+                //endregion
 
                 //Checks if there is a next page navigation arrow which is what I use to on to the next page
                 //If there is a navigation arrow it takes the href attribute and uses for the next pass through the loop
